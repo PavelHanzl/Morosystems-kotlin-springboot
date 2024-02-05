@@ -1,0 +1,3 @@
+[submodule "sysinfoserver"]
+    path = sysinfoserver
+    url = https://github.com/PavelHanzl/sysinfoserver
