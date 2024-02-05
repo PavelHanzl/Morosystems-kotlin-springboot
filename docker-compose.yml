@@ -1,0 +1,74 @@
+version: '3.9'
+
+services:
+  server:
+    container_name: sysinfo-server
+    image: pavelhanzl/sysinfoserver
+    build:
+      context: ./sysinfoserver/sysinfoserver
+      dockerfile: Dockerfile
+      args:
+        DB_URL: ${DB_URL}
+        PG_USER: ${PG_USER}
+        PG_PASSWORD: ${PG_PASSWORD}
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/postgres
+      PG_USER: postgres
+      PG_PASSWORD: postgres
+    depends_on:
+      - db
+
+  client1:
+    container_name: sysinfo-client1
+    image: pavelhanzl/sysinfoclient
+    build:
+      context: ./sysinfoclient/sysinfoclient
+      dockerfile: Dockerfile
+      args:
+        SRV_PORT: ${DB_URL}
+    ports:
+      - "8081:8081"
+    environment:
+      SRV_PORT: 8081
+    depends_on:
+      - server
+
+
+  client2:
+    container_name: sysinfo-client2
+    image: pavelhanzl/sysinfoclient
+    ports:
+      - "8082:8082"
+    environment:
+      SRV_PORT: 8082
+    depends_on:
+      - server
+      - client1
+
+  db:
+    container_name: db
+    image: postgres:12
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  frontend-app:
+    build:
+      context: ./frontend-app
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend-app:/app
+    depends_on:
+      - server
+
+volumes:
+  pgdata: {}
