@@ -8,4 +8,4 @@
 
 [submodule "frontend-app"]
     path = frontend-app
-    url = https://github.com/PavelHanzl/sysinfoserver
+    url = https://github.com/PavelHanzl/frontend-app
