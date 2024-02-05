@@ -1,3 +1,11 @@
 [submodule "sysinfoserver"]
     path = sysinfoserver
     url = https://github.com/PavelHanzl/sysinfoserver
+
+[submodule "sysinfoclient"]
+    path = sysinfoclient
+    url = https://github.com/PavelHanzl/sysinfoclient
+
+[submodule "frontend-app"]
+    path = frontend-app
+    url = https://github.com/PavelHanzl/sysinfoserver
