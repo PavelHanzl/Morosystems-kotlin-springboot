@@ -12,14 +12,16 @@ services:
         PG_USER: ${PG_USER}
         PG_PASSWORD: ${PG_PASSWORD}
     ports:
-      - "8443:8443"
+      - "443:443"
     environment:
       DB_URL: jdbc:postgresql://db:5432/postgres
       PG_USER: postgres
       PG_PASSWORD: postgres
-      SRV_PORT: 8443
+      SRV_PORT: 443
     depends_on:
       - db
+    networks:
+      - mynetwork
 
   client1:
     container_name: sysinfo-client1
@@ -36,6 +38,8 @@ services:
       DOCKER_ENV: true
     depends_on:
       - server
+    networks:
+      - mynetwork
 
 
   client2:
@@ -49,6 +53,8 @@ services:
     depends_on:
       - server
       - client1
+    networks:
+      - mynetwork
 
   db:
     container_name: db
@@ -61,6 +67,8 @@ services:
       POSTGRES_DB: postgres
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - mynetwork
 
   frontend-app:
     build:
@@ -72,6 +80,11 @@ services:
       - ./frontend-app:/app
     depends_on:
       - server
+    networks:
+      - mynetwork
 
 volumes:
   pgdata: {}
+
+networks:
+  mynetwork:
