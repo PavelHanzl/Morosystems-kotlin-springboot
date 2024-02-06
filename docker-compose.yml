@@ -12,11 +12,12 @@ services:
         PG_USER: ${PG_USER}
         PG_PASSWORD: ${PG_PASSWORD}
     ports:
-      - "8080:8080"
+      - "8443:8443"
     environment:
       DB_URL: jdbc:postgresql://db:5432/postgres
       PG_USER: postgres
       PG_PASSWORD: postgres
+      SRV_PORT: 8443
     depends_on:
       - db
 
@@ -32,6 +33,7 @@ services:
       - "8081:8081"
     environment:
       SRV_PORT: 8081
+      DOCKER_ENV: true
     depends_on:
       - server
 
@@ -43,6 +45,7 @@ services:
       - "8082:8082"
     environment:
       SRV_PORT: 8082
+      DOCKER_ENV: true
     depends_on:
       - server
       - client1
