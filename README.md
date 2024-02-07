@@ -2,6 +2,9 @@
 
 Tento projekt monitorovuje využití paměti klientů. Zahrnuje backend server Spring boot, PostgreSQL databázi, dva Spring Boot klienty a frontend aplikaci v Reactu.
 
+## Klonování repozitáře
+- Repozitář je složen ze submodulů je potřeba použít ```git clone --recursive ```
+
 ## Popis
 
 - **Server a Databáze**: Po spuštění pomocí Docker Compose se vytvoří server (port 443) s integrovanou PostgreSQL databází (port 5432).
