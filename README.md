@@ -1,4 +1,4 @@
-# Morosystems: Kotlin springboot
+# Morosystems: Spring Boot App
 
 Tento projekt monitorovuje využití paměti klientů. Zahrnuje backend server Spring boot, PostgreSQL databázi, dva Spring Boot klienty a frontend aplikaci v Reactu.
 
